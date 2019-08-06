@@ -26,8 +26,8 @@
     #camera--trigger {
         display: none;
         position: relative;
-        width: 99vw;
-        height: 99vh;
+        width: 99%;
+        height: 99%;
     }
     #camera--trigger:before {
         display: block;
@@ -35,8 +35,8 @@
         width: 20px;
         height: 20px;
         position: absolute;
-        top: -1px;
-        left: -1px;
+        top: 1px;
+        left: 1px;
         border-top: 4px solid #000;
         border-left: 4px solid #000;
     }
@@ -46,8 +46,8 @@
         width: 20px;
         height: 20px;
         position: absolute;
-        top: -1px;
-        right: -1px;
+        top: 1px;
+        right: 1px;
         border-top: 4px solid #000;
         border-right: 4px solid #000;
     }
@@ -57,8 +57,8 @@
         width: 20px;
         height: 20px;
         position: absolute;
-        bottom: -1px;
-        left: -1px;
+        bottom: 1px;
+        left: 1px;
         border-bottom: 4px solid #000;
         border-left: 4px solid #000;
     }
@@ -68,8 +68,8 @@
         width: 20px;
         height: 20px;
         position: absolute;
-        bottom: -1px;
-        right: -1px;
+        bottom: 1px;
+        right: 1px;
         border-bottom: 4px solid #000;
         border-right: 4px solid #000;
     }
@@ -135,6 +135,7 @@
             cameraOutput.classList.add("taken");
 
             cameraView.srcObject.getVideoTracks().forEach(track => track.stop());
+            cameraSensor.style.display = 'none';
         };
         // Start the video stream when the window loads
         window.addEventListener("load", cameraStart, false);
