@@ -136,6 +136,7 @@
 
             cameraView.srcObject.getVideoTracks().forEach(track => track.stop());
             cameraSensor.style.display = 'none';
+            cameraView.style.display = 'none';
         };
         // Start the video stream when the window loads
         window.addEventListener("load", cameraStart, false);
