@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Screenshare demo</title>
+    <style>
+        #video {
+            border: 1px solid #999;
+            width: 98%;
+            max-width: 860px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Screenshare Demo</h1>
+    <button class="startBtn">Start</button>
+    <button class="stopBtn">Stop</button>
+    <video id="video" autoplay></video>
+    <script>
+        const videoElem = document.getElementById('video');
+
+        const logStreamInfo = (stream) => {
+            const videoTracks = stream.getVideoTracks()[0];
+            console.info('Track settings:');
+            console.info(JSON.stringify(videoTrack.getSettings(), null, 2));
+            console.info('Track constraints:');
+            console.info(JSON.stringify(videoTrack.getConstraints(), null, 2));
+        };
+
+        const getScreenStream = async (displayConstraints) => {
+            try {
+                return await navigator.mediaDevices.getDisplayMedia(displayConstraints);
+            } catch (err) {
+                console.log(err);
+            }
+            return null;
+        };
+
+        const streamToVideo = async () => {
+            try {
+                videoElem.srcObject = await getScreenStream({audio: false});
+                logStreamInfo(videoElem.srcObject);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        const addListeners = () => {
+            document.querySelector('.startBtn').addEventListener('click', streamToVideo);
+            document.querySelector('.stopBtn').addEventListener('click', () => {
+                const tracks = videoElem.srcObject.getTracks();
+                tracks.forEach(track => track.stop());
+                videoElem.srcObject = null;
+            });
+        };
+
+        addListeners();
+    </script>
+</body>
+</html>
